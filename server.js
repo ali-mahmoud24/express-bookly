@@ -1,5 +1,6 @@
 const app = require('./src/app');
 const connectDB = require('./src/config/database');
+const swaggerDocs = require('./swagger');
 
 // Connect to DB before starting server
 connectDB();
