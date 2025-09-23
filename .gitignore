@@ -1,0 +1,26 @@
+# Ignore all .log files
+*.log
+
+# Ignore the 'target' directory and its contents
+target/
+
+# Ignore the 'node_modules' directory used in Node.js projects
+node_modules/
+
+# Ignore specific files
+# .env
+config.local.js
+
+# Ignore all files with a .tmp extension, but not a specific one
+*.tmp
+!important.tmp
+
+# Ignore macOS specific files
+.DS_Store
+
+# Ignore editor-specific files (e.g., VS Code)
+.vscode/
+
+# Ignore build output directories
+build/
+dist/
