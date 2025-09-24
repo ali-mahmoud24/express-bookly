@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
+const cookieParser = require('cookie-parser');
 
 const userRouter = require('./routes/users.routes');
 const authRouter = require('./routes/auth.routes');
@@ -12,6 +13,7 @@ const app = express();
 // Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cookieParser());
 
 // Routes
 app.use('/api/users', userRouter);

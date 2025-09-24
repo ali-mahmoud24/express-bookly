@@ -1,6 +1,3 @@
-// middlewares/errorMiddleware.js
-const ApiError = require('../utils/ApiError');
-
 // Global error handler
 const globalErrorHandler = (err, req, res, next) => {
   const statusCode = err.statusCode || 500;
