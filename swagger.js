@@ -11,8 +11,14 @@ const options = {
       version: '1.0.0',
       description: 'Auto-generated API documentation',
     },
-    servers: [{ url: `http://localhost:${PORT}/api` }],
-
+    servers: [
+      {
+        url:
+          process.env.NODE_ENV === 'production'
+            ? 'https://express-bookly.vercel.app/api'
+            : `http://localhost:${PORT}/api`,
+      },
+    ],
     components: {
       securitySchemes: {
         cookieAuth: {
@@ -23,7 +29,6 @@ const options = {
       },
     },
   },
-  // Paths to files containing JSDoc comments
   apis: ['./src/routes/*.js'],
 };
 
