@@ -1,3 +1,4 @@
+// src/config/swaggerDocs.js
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
@@ -29,14 +30,23 @@ const options = {
       },
     },
   },
+  // Paths to files containing JSDoc comments
   apis: ['./src/routes/*.js'],
 };
 
 const swaggerSpec = swaggerJsdoc(options);
 
-const swaggerDocs = (app, PORT) => {
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-  console.log(`📄 Swagger docs available at http://localhost:${PORT}/api-docs`);
+const swaggerDocs = (app) => {
+  // Serve Swagger UI
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, { explorer: true }));
+
+  // Expose raw JSON spec (for debugging Swagger UI issues)
+  app.get('/swagger.json', (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.send(swaggerSpec);
+  });
+
+  console.log(`📄 Swagger docs ready. Local: http://localhost:${PORT}/api-docs`);
 };
 
 module.exports = swaggerDocs;
