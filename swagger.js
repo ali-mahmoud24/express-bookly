@@ -37,16 +37,20 @@ const options = {
 const swaggerSpec = swaggerJsdoc(options);
 
 const swaggerDocs = (app) => {
-  // Serve Swagger UI
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, { explorer: true }));
-
-  // Expose raw JSON spec (for debugging Swagger UI issues)
+  // Serve swagger.json
   app.get('/swagger.json', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(swaggerSpec);
   });
 
-  console.log(`📄 Swagger docs ready. Local: http://localhost:${PORT}/api-docs`);
+  // Serve UI with proper asset handling
+  app.use(
+    '/api-docs',
+    swaggerUi.serveFiles(swaggerSpec, {}),
+    swaggerUi.setup(swaggerSpec)
+  );
+
+  console.log('📄 Swagger docs available at /api-docs');
 };
 
 module.exports = swaggerDocs;
