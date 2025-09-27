@@ -1,8 +1,9 @@
-// swagger.js
+// src/config/swaggerDocs.js
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
-// Swagger definition
+const PORT = process.env.PORT || 5000;
+
 const options = {
   definition: {
     openapi: '3.0.0',
@@ -11,6 +12,14 @@ const options = {
       version: '1.0.0',
       description: 'Auto-generated API documentation',
     },
+    servers: [
+      {
+        url:
+          process.env.NODE_ENV === 'production'
+            ? 'https://express-bookly.vercel.app/api'
+            : `http://localhost:${PORT}/api`,
+      },
+    ],
     components: {
       securitySchemes: {
         cookieAuth: {
@@ -20,31 +29,25 @@ const options = {
         },
       },
     },
-    // no hardcoded servers here; will be dynamic
   },
-  apis: ['./src/routes/*.js'], // path to your route files with JSDoc
+  // Paths to files containing JSDoc comments
+  apis: ['./src/routes/*.js'],
 };
 
-// Generate Swagger spec
 const swaggerSpec = swaggerJsdoc(options);
 
 const swaggerDocs = (app) => {
-  // Serve raw JSON
+  // Serve swagger.json
   app.get('/swagger.json', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(swaggerSpec);
   });
 
-  // Serve Swagger UI
+  // Serve UI with proper asset handling
   app.use(
     '/api-docs',
-    swaggerUi.serve,
-    swaggerUi.setup(undefined, {
-      explorer: true,
-      swaggerOptions: {
-        url: '/swagger.json', // <-- point UI to JSON endpoint
-      },
-    })
+    swaggerUi.serveFiles(swaggerSpec, {}),
+    swaggerUi.setup(swaggerSpec)
   );
 
   console.log('📄 Swagger docs available at /api-docs');
