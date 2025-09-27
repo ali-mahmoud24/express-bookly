@@ -12,9 +12,19 @@ const options = {
       description: 'Auto-generated API documentation',
     },
     servers: [{ url: `http://localhost:${PORT}/api` }],
+
+    components: {
+      securitySchemes: {
+        cookieAuth: {
+          type: 'apiKey',
+          in: 'cookie',
+          name: 'token',
+        },
+      },
+    },
   },
   // Paths to files containing JSDoc comments
-  apis: ['./routes/*.js'],
+  apis: ['./src/routes/*.js'],
 };
 
 const swaggerSpec = swaggerJsdoc(options);

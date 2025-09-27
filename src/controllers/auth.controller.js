@@ -48,6 +48,7 @@ const sendTokenResponse = (user, statusCode, res) => {
  * @route POST /api/auth/register
  * @access Public
  */
+
 const registerUser = async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
 
@@ -80,6 +81,7 @@ const loginUser = async (req, res) => {
  * @route POST /api/auth/logout
  * @access Public
  */
+
 const logoutUser = async (req, res) => {
   res.clearCookie('token', {
     httpOnly: true,

@@ -1,5 +1,5 @@
 const asyncHandler = require('express-async-handler');
-const Author = require('../models/Author.model');
+const Author = require('../models/author.model');
 const ApiError = require('../utils/ApiError');
 
 /**

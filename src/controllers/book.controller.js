@@ -1,5 +1,5 @@
 const asyncHandler = require('express-async-handler');
-const Book = require('../models/Book.model');
+const Book = require('../models/book.model');
 const ApiError = require('../utils/ApiError');
 
 /**
