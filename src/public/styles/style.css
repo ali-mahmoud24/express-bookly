@@ -1,0 +1,96 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #4e54c8, #8f94fb);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+.container {
+  background: #fff;
+  padding: 60px 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.container h1 {
+  font-size: 2.4rem;
+  color: #333;
+  margin-bottom: 25px;
+}
+
+.container input {
+  width: 100%;
+  padding: 15px;
+  margin: 12px 0;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-size: 1.1rem;
+  outline: none;
+  transition: border 0.3s;
+}
+
+.container input:focus {
+  border-color: #4e54c8;
+}
+
+/* الزر */
+.container button {
+  width: 100%;
+  padding: 15px;
+  background: #4e54c8;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background 0.3s;
+}
+
+.container button:hover {
+  background: #3a3eb8;
+}
+
+.container p {
+  margin-top: 18px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.container a {
+  color: #4e54c8;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.container a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .container {
+    padding: 35px 25px;
+  }
+  .container h1 {
+    font-size: 1.8rem;
+  }
+  .container button {
+    font-size: 1.05rem;
+    padding: 12px;
+  }
+}

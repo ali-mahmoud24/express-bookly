@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>myBooks</title>
+  <link rel="stylesheet" href="/styles/mybooks.css" />
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="logo">📚 BookApp</div>
+    <ul class="nav-links">
+      <li><a href="/books">Books</a></li>
+      <li><a href="/mybooks">MyBooks</a></li>
+      <li><a href="/profile">Profile</a></li>
+    </ul>
+    <div class="nav-user">
+      <span>👋 Welcome, <%= user.firstname %>
+          <%= user.lastname %></span>
+      <a href="/logout" class="btn-logout">Signout</a>
+    </div>
+  </nav>
+
+  <!-- 🔹 Books Content -->
+  <div class="dashboard-container">
+    <h1>MyBooks</h1>
+    <div class="books-grid">
+      <% user.borrowedBooks.forEach(book=> { %>
+        <div class="book-card">
+          <h2>
+            <%= book.title %>
+          </h2>
+          <p><strong>Author:</strong>
+            <%= book.author.name %>
+          </p>
+          <p><strong>Category:</strong>
+            <%= book.category %>
+          </p>
+          <p><strong>Description:</strong>
+            <%= book.description %>
+          </p>
+          <button class="return-btn" data-id="<%= book._id %>">Return</button>
+        </div>
+        <% }) %>
+    </div>
+  </div>
+  <script>
+    document.querySelectorAll(".return-btn").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const bookId = btn.dataset.id; // take id from data-id
+        const title = btn.closest(".book-card").querySelector("h2").textContent;
+
+        try {
+          const res = await fetch(`/api/users/me/return/${bookId}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+          });
+          const data = await res.json();
+
+          if (data.success) {
+            alert(`You returned "${title}" successfully!`);
+            btn.closest(".book-card").remove(); // remove from UI
+          } else {
+            alert(data.message || "Return failed!");
+          }
+        } catch (err) {
+          console.error(err);
+          alert("Something went wrong while returning the book.");
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

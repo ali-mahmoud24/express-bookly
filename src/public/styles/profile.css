@@ -1,0 +1,155 @@
+/* Profile Page Styling */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  background: #f5f5f5;
+}
+
+/* Navbar */
+.navbar {
+  background: linear-gradient(90deg, #0d138b, #3a57e8);
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.navbar .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.navbar .nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.navbar .nav-links li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.navbar .nav-links li a:hover {
+  color: #ffdd57;
+}
+
+.navbar .nav-user {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.navbar .nav-user span {
+  font-weight: 600;
+  background: #fff;
+  color: #0d138b;
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+.btn-logout {
+  background: #ff4757;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.btn-logout:hover {
+  background: #e84118;
+}
+
+/* Profile Container */
+.profile-container {
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.profile-container h1 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #4e54c8;
+}
+
+.profile-card {
+  text-align: left;
+  background: #f9f9ff;
+  padding: 20px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  color: #333;
+  line-height: 1.8;
+}
+
+.profile-card strong {
+  color: #4e54c8;
+}
+
+.profile-actions {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-btn,
+.update-btn {
+  padding: 6px 12px;
+  margin-right: 8px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+}
+
+.edit-btn {
+  background-color: #4e54c8;
+}
+
+.update-btn {
+  background-color: #4e54c8;
+}
+
+/* Profile Input Styling */
+.profile-card input {
+  display: inline-block;
+  width: auto;
+  min-width: 150px;
+  padding: 6px 10px;
+  margin-left: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: #fff;
+  color: #333;
+  transition: border 0.3s, box-shadow 0.3s;
+  vertical-align: middle;
+}
+
+/* Input focus effect */
+.profile-card input:focus {
+  border-color: #4e54c8;
+  box-shadow: 0 0 6px rgba(78, 84, 200, 0.4);
+  outline: none;
+}
+
+/* Disabled Update button style */
+.update-btn:disabled {
+  background-color: #bbb;
+  cursor: not-allowed;
+}

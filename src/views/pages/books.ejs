@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Books</title>
+  <link rel="stylesheet" href="/styles/books.css" />
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="logo">📚 BookApp</div>
+    <ul class="nav-links">
+      <li><a href="/books">Books</a></li>
+      <li><a href="/mybooks">MyBooks</a></li>
+      <li><a href="/profile">Profile</a></li>
+    </ul>
+    <div class="nav-user">
+      <span>👋 Welcome, <%= user.firstname %>
+          <%= user.lastname %></span>
+      <a href="/logout" class="btn-logout">Signout</a>
+    </div>
+  </nav>
+
+  <div class="dashboard-container">
+    <h1>Books Collection</h1>
+    <div class="books-grid">
+      <% books.forEach(book=> { %>
+        <div class="book-card">
+          <h2>
+            <%= book.title %>
+          </h2>
+          <p><strong>Author:</strong>
+            <%= book.author?.name || "Unknown" %>
+          </p>
+          <p><strong>Category:</strong>
+            <%= book.category || "—" %>
+          </p>
+          <p><strong>Description:</strong>
+            <%= book.description || "No description" %>
+          </p>
+          <p><strong>Available:</strong>
+            <%= book.copiesAvailable %>
+          </p>
+
+          <% if (user.borrowedBooks.includes(book._id.toString())) { %>
+            <button class="return-btn" data-id="<%= book._id %>">Return</button>
+            <% } else { %>
+              <button class="borrow-btn" data-id="<%= book._id %>">Borrow</button>
+              <% } %>
+        </div>
+        <% }) %>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll(".borrow-btn").forEach(btn => {
+      btn.addEventListener("click", async () => {
+        const bookId = btn.dataset.id;
+        const res = await fetch(`/api/users/me/borrow/${bookId}`, { method: "POST" });
+        const data = await res.json();
+        alert(data.message);
+        if (data.success) window.location.reload();
+      });
+    });
+
+    document.querySelectorAll(".return-btn").forEach(btn => {
+      btn.addEventListener("click", async () => {
+        const bookId = btn.dataset.id;
+        const res = await fetch(`/api/users/me/return/${bookId}`, { method: "POST" });
+        const data = await res.json();
+        alert(data.message);
+        if (data.success) window.location.reload();
+      });
+    });
+  </script>
+</body>
+
+</html>

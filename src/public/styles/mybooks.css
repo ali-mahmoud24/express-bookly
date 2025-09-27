@@ -1,0 +1,139 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #f5f5f5;
+}
+.navbar {
+  background: linear-gradient(90deg, #0d138b, #3a57e8);
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.navbar .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.navbar .nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.navbar .nav-links li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.navbar .nav-links li a:hover {
+  color: #ffdd57;
+}
+
+.navbar .nav-user {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.navbar .nav-user span {
+  font-weight: 600;
+  background: #fff;
+  color: #0d138b;
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+.btn-logout {
+  background: #ff4757;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.btn-logout:hover {
+  background: #e84118;
+}
+
+/* Dashboard content */
+.dashboard-container {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard-container h1 {
+  text-align: center;
+  color: #4e54c8;
+}
+
+/* Books Grid */
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+}
+
+.book-card {
+  background: #fdfdfd;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s;
+}
+
+.book-card:hover {
+  transform: translateY(-5px);
+}
+
+.book-card h2 {
+  margin: 0 0 10px;
+  font-size: 20px;
+  color: #0d138b;
+}
+
+.book-card p {
+  margin: 5px 0;
+  color: #555;
+}
+.borrow-btn {
+  margin-top: 8px;
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  background-color: #285ba7;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.borrow-btn:hover {
+  background-color: #4744ee;
+}
+
+.return-btn {
+  margin-top: 8px;
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.return-btn:hover {
+  background-color: #c82333;
+}

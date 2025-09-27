@@ -30,13 +30,7 @@ const sendTokenResponse = (user, statusCode, res) => {
     .cookie('token', token, {
       httpOnly: true,
       maxAge: 5 * 24 * 60 * 60 * 1000, // 5 days
-    })
-    .json({
-      success: true,
-      id: user._id,
-      name: user.name,
-      email: user.email,
-    });
+    }).redirect('/profile')
 };
 
 // ===============================
@@ -53,10 +47,14 @@ const registerUser = async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
 
   const userExists = await User.findOne({ email });
-  if (userExists) throw new ApiError(400, 'User already exists');
+  if (userExists) {
+    return res.render('pages/signup', { error: 'User already exists' }); 
+    // throw new ApiError(400, 'User already exists');
+  }
 
   const user = await User.create({ firstName, lastName, email, password });
-  sendTokenResponse(user, 201, res);
+  // sendTokenResponse(user, 201, res);
+  res.redirect('/login');
 };
 
 /**

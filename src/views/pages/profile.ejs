@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Profile</title>
+  <link rel="stylesheet" href="/styles/profile.css" />
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">📚 BookApp</div>
+    <ul class="nav-links">
+      <li><a href="/books">books</a></li>
+      <li><a href="/mybooks">MyBooks</a></li>
+      <li><a href="/profile">Profile</a></li>
+    </ul>
+    <div class="nav-user">
+      <span>👋 Welcome, <%= user.firstname %>
+          <%= user.lastname %></span>
+      <a href="/logout" class="btn-logout">Sign Out</a>
+    </div>
+  </nav>
+
+  <!-- Profile Content -->
+  <div class="profile-container">
+    <h1>Your Profile</h1>
+    <div class="profile-card">
+      <p><strong>First Name:</strong> <span class="fname">
+          <%= user.firstname %>
+        </span></p>
+      <p><strong>Last Name:</strong> <span class="lname">
+          <%= user.lastname %>
+        </span></p>
+      <p><strong>Email:</strong> <span class="email">
+          <%= user.email %>
+        </span></p>
+
+      <div class="profile-actions">
+        <button class="edit-btn">Edit</button>
+        <button class="update-btn" disabled>Update</button>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+
+
+  <script>
+    const editBtn = document.querySelector('.edit-btn');
+    const updateBtn = document.querySelector('.update-btn');
+
+    let fnameInput, lnameInput, emailInput;
+
+    editBtn.addEventListener('click', () => {
+      // grab current values
+      const fnameVal = document.querySelector('.fname').textContent;
+      const lnameVal = document.querySelector('.lname').textContent;
+      const emailVal = document.querySelector('.email').textContent;
+
+      // create input fields
+      fnameInput = document.createElement('input');
+      fnameInput.value = fnameVal;
+
+      lnameInput = document.createElement('input');
+      lnameInput.value = lnameVal;
+
+      emailInput = document.createElement('input');
+      emailInput.value = emailVal;
+
+      // replace spans with inputs
+      document.querySelector('.fname').replaceWith(fnameInput);
+      document.querySelector('.lname').replaceWith(lnameInput);
+      document.querySelector('.email').replaceWith(emailInput);
+
+      editBtn.disabled = true;
+      updateBtn.disabled = false;
+    });
+
+    updateBtn.addEventListener('click', async () => {
+      const updatedData = {
+        firstname: fnameInput.value.trim(),
+        lastname: lnameInput.value.trim(),
+        email: emailInput.value.trim()
+      };
+
+      try {
+        const res = await fetch('/update-profile', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updatedData)
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+          // rebuild spans with new values
+          const fnameSpan = document.createElement('span');
+          fnameSpan.className = 'fname';
+          fnameSpan.textContent = updatedData.firstname;
+
+          const lnameSpan = document.createElement('span');
+          lnameSpan.className = 'lname';
+          lnameSpan.textContent = updatedData.lastname;
+
+          const emailSpan = document.createElement('span');
+          emailSpan.className = 'email';
+          emailSpan.textContent = updatedData.email;
+
+          fnameInput.replaceWith(fnameSpan);
+          lnameInput.replaceWith(lnameSpan);
+          emailInput.replaceWith(emailSpan);
+
+          alert('Profile updated successfully!');
+          updateBtn.disabled = true;
+          editBtn.disabled = false;
+        } else {
+          alert(data.message || 'Update failed!');
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Something went wrong while updating your profile.');
+      }
+    });
+  </script>
+</body>
+
+</html>

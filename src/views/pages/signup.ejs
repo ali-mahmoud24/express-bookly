@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="/styles/signup.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Create an Account</h1>
+      <% if (error) { %>
+      <p style="color: red"><%= error %></p>
+      <% } %>
+      <form id="signupForm" action="/api/auth/register" method="POST">
+        <div class="input-group">
+          <input
+            type="text"
+            id="firstname"
+            name="firstName"
+            placeholder="First Name"
+            required
+          />
+        </div>
+        <div class="input-group">
+          <input
+            type="text"
+            id="lastname"
+            name="lastName"
+            placeholder="Last Name"
+            required
+          />
+        </div>
+        <div class="input-group">
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email"
+            required
+          />
+        </div>
+        <div class="input-group">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+            required
+          />
+        </div>
+        <button type="submit">Sign Up</button>
+      </form>
+      <p>Already have an account? <a href="/">Login</a></p>
+    </div>
+
+    <script>
+      document
+        .getElementById("signupForm")
+        .addEventListener("submit", function (e) {
+          const firstname = document.getElementById("firstname").value.trim();
+          const lastname = document.getElementById("lastname").value.trim();
+          const email = document.getElementById("email").value.trim();
+          const password = document.getElementById("password").value;
+          if (firstname.length < 2 || lastname.length < 2) {
+            alert("Named Must Be at Least 2 Charc");
+            e.preventDefault();
+            return;
+          }
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(email)) {
+            alert("Please enter Valid email");
+            e.preventDefault();
+            return;
+          }
+          if (password.length < 6) {
+            alert("Password Must be at least 6 charc");
+            e.preventDefault();
+            return;
+          }
+        });
+    </script>
+  </body>
+</html>
