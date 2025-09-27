@@ -31,6 +31,14 @@ const userSelfUpdateSchema = {
     lastName: { type: 'string', minLength: 2 },
     email: { type: 'string', format: 'email' },
     password: { type: 'string', minLength: 6 },
+    // Optional profile fields for user self-update
+    phoneNumber: { type: 'string' },
+    address: { type: 'string', maxLength: 255 },
+    bio: { type: 'string', maxLength: 500 },
+    birthDate: { type: 'string', format: 'date' },
+    gender: { type: 'string', enum: ['male', 'female'] },
+    language: { type: 'string' },
+    country: { type: 'string' },
   },
 };
 
